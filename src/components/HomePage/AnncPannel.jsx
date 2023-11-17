@@ -110,6 +110,7 @@ export default function AnncPanel() {
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -120,6 +121,7 @@ export default function AnncPanel() {
       setNotFound(false);
 
     setCardData(data.data.Cards);
+    setTotalPage(data.data.PageCount)
     setIsLoading(false);
   }
 
@@ -238,7 +240,7 @@ export default function AnncPanel() {
     control: (base, state) => ({
       ...base,
       backgroundColor: 'white',
-      borderRadius: '0.75rem',
+      borderRadius: '0.5rem',
       borderColor: '#9095a0',
       paddingLeft: '0.25rem',
       color: '#4a5568',
@@ -251,7 +253,7 @@ export default function AnncPanel() {
     control: (base, state) => ({
       ...base,
       backgroundColor: 'white',
-      borderRadius: '0.75rem',
+      borderRadius: '0.5rem',
       borderColor: '#9095a0',
       paddingLeft: '0.25rem',
       color: '#4a5568',
@@ -365,7 +367,7 @@ export default function AnncPanel() {
                   </div>
                 }
                 <div className="flex flex-wrap justify-center items-center">
-                  <Pagination total={10}/>
+                  <Pagination total={totalPage}/>
                 </div>
               </div>
             </div>
