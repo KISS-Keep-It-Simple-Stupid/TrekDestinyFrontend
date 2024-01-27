@@ -4,6 +4,8 @@ import { useGetChatHistory } from "../../hooks/chatApis/useGetChatHistory";
 import { useGetChatMessageCount } from "../../hooks/chatApis/useGetChatMessageCount";
 import { useAcceptOffer } from "../../hooks/chatApis/useAcceptOffer";
 import { useRejectOffer } from "../../hooks/chatApis/useRejectOffer";
+import { Avatar } from '@mui/material';
+import defaultProfilePic from "../../assets/defaultUserPic.png";
 import image1 from "../../assets/baktash.jpg";
 import pic from "../../assets/chat.jpg";
 import config from "../../hooks/config";
@@ -123,13 +125,23 @@ function ChatRoom({ chatData }) {
       );
       const fetchedMessages = historyResponse.data.reverse();
 
-      // Update state with the new messages
+      if(historyResponse.data.length===0){
+        // console.log("message zero");
+        currentpage-=1;
+        if (messageListRef.current) {
+          messageListRef.current.scrollTop = firstScroll;
+        }
+        setShouldScroll(false);
+        // messageListRef.current.scrollTop=firstScroll;
+      }else{
+
       setMessages((prevMessages) => [...fetchedMessages, ...prevMessages]);
 
       // Set the scroll position back to the previous value + 880 pixels
       if (messageListRef.current) {
         messageListRef.current.scrollTop = firstScroll + 300;
       }
+    }
     } catch (error) {
       console.error("Error fetching more messages:", error);
     }
@@ -205,16 +217,26 @@ function ChatRoom({ chatData }) {
     }
   };
 
+  const handleError = (e) => {
+    e.target.onerror = null;
+    e.target.src = defaultProfilePic;
+  }
+
   return (
     <div className="w-1/2 h-[80vh] flex flex-col ">
       <div className="flex items-center justify-between py-3 border-b-2 bg-gray-400 rounded-md border-gray-200 w-full ">
         <div className="flex items-center space-x-4">
           <div className="relative ml-4 flex items-center space-x-4">
             <div className="relative">
-              <img
+              {/* <img
                 src={contactImageUrl}
                 alt=""
                 className="w-20 h-20 rounded-full object-cover"
+              /> */}
+              <Avatar
+                src={contactImageUrl}
+                onError={handleError}
+                sx={{ width: 80, height: 80 }}
               />
             </div>
             <div className="flex flex-col leading-tight">
@@ -282,10 +304,15 @@ function ChatRoom({ chatData }) {
                   </div>
                 </div>
                 {msg.username !== myUsername && (
-                  <img
+                  // <img
+                  //   src={contactImageUrl}
+                  //   alt="Profile"
+                  //   className="w-6 h-6 rounded-full order-1"
+                  // />
+                  <Avatar
                     src={contactImageUrl}
-                    alt="Profile"
-                    className="w-6 h-6 rounded-full order-1"
+                    onError={handleError}
+                    sx={{ width: 60, height: 60 }}
                   />
                 )}
               </div>
@@ -304,25 +331,7 @@ function ChatRoom({ chatData }) {
               onChange={(e) => setMessage(e.target.value)}
             />
             <div className="flex-shrink-0 ml-2">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6 text-gray-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                  ></path>
-                </svg>
-              </button>
+              
               <button
                 type="button"
                 className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
