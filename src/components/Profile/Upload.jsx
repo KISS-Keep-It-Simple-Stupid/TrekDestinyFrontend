@@ -16,12 +16,14 @@ const Uploadimg = ({setHostHouseImages , baseImage}) => {
 
   useEffect(() => {
     const convertUrlsToFiles = async () => {
-      let newFiles = [];
-      for(var i=0 ; i < baseImage.length ; i++) {
-        const file = await urlToFile(baseImage[i], `file${i}.jpg`, 'image/jpeg')
-        newFiles.push(file);
+      if (baseImage){
+        let newFiles = [];
+        for(var i=0 ; i < baseImage.length ; i++) {
+          const file = await urlToFile(baseImage[i], `file${i}.jpg`, 'image/jpeg')
+          newFiles.push(file);
+        }
+        setFile(newFiles);
       }
-      setFile(newFiles);
     };
   
     convertUrlsToFiles();

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Pooria from "./Pooria.jpg";
-import Shakiba from "./shakiba.jpg";
-import Baktash from "./baktash.jpg";
-import Sina from "./Sina.jpg";
-import Sobhan from "./Sobhan.jpg";
+import Pooria from "../../assets/Pooria.jpg";
+import Shakiba from "../../assets/shakiba.jpg";
+import Baktash from "../../assets/baktash.jpg";
+import Sina from "../../assets/Sina.jpg";
+import Sobhan from "../../assets/Sobhan.jpg";
 
 const About = () => {
   return (

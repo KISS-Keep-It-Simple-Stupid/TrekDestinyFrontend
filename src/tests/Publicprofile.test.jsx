@@ -3,10 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, getByRole,screen, getAllByText, getByDisplayValue} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vitest } from 'vitest';
+import { usePublicProfile } from "../hooks/usePublicProfile";
 
 
 
 test("should render the component without crashing", () => {
   render(<BrowserRouter><PublicProfile /></BrowserRouter>);
 });
-

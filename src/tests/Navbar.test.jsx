@@ -23,5 +23,5 @@ it('should display navigation links correctly', () => {
     );
     // Assert that all navigation links are displayed correctly
     expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('About')).toBeInTheDocument();
+    expect(screen.getByText('About Us')).toBeInTheDocument();
 });
