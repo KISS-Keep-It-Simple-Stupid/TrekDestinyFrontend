@@ -70,7 +70,7 @@ test("should not render the modal component when isVisible prop is false", () =>
   
     //     render(<Modal isVisible={isVisible} onClose={onClose} isAccept={isAccept} index={index} removeCard={removeCard} CallBack={CallBack} />);
   
-    //     expect(screen.getByText('Are you sure you want start')).toBeInTheDocument();
+    //     expect(screen.getByText('Are you sure you want start chat with this user?')).toBeInTheDocument();
     //   });
 
 
