@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, getByRole,screen, getAllByText, getByDisplayValue } from '@testing-library/react';
+import { getByLabelText } from '@testing-library/react';
 
 
 // Navbar renders without errors
@@ -25,3 +26,4 @@ it('should display navigation links correctly', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('About Us')).toBeInTheDocument();
 });
+

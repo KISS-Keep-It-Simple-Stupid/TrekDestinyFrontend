@@ -21,3 +21,39 @@ it('should allow user to input a title for the blog post', () => {
     expect(titleInput.value).toBe('Test Title');
 });
 
+// Does not allow user to create a blog post without a cover photo
+it('should not allow user to create a blog post without a cover photo', () => {
+    // Arrange
+    const onClose = vitest.fn();
+    const Data = {};
+
+    // Act
+    render(<Blog onClose={onClose} Data={Data} />);
+    const titleInput = screen.getByLabelText('Title');
+    userEvent.type(titleInput, 'Test Title');
+    const createButton = screen.getByRole('button', { name: 'Create' });
+    userEvent.click(createButton);
+
+    // Assert
+    expect(onClose).not.toHaveBeenCalled();
+});
+
+    // Displays host information, including username, image, and rating
+    it('should display host information', () => {
+        // Arrange
+        const onClose = vitest.fn();
+        const Data = {
+          CardId: '12345',
+        };
+        const use2PBlogMock = vitest.fn().mockResolvedValue({
+          data: {
+            HostUsername: 'JohnDoe',
+            HostImage: 'https://example.com/profile.jpg',
+          },
+        });
+        vitest.mock('../../hooks/use2PBlog', () => use2PBlogMock);
+  
+        // Act
+        render(<Blog onClose={onClose} Data={Data} />);
+
+      });
